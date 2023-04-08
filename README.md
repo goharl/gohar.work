@@ -1,87 +1,168 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>link_website</title>
-</head>
-<STYle>
-    #hedi1{TEXT-align:center;}
-    #hedi1{-webkit-text-fill-color:black;}
-    #hedi1{background-color:white;}
-    #p1{TEXT-align:center;}
-    #p1{-webkit-text-fill-color:greenyellow;}
-    #p2{TEXT-align:center;}
-    #p2{-webkit-text-fill-color:black;}
-    #p2{background-color:white;}
-    #html{background-color: black;}
-    #a{-webkit-text-fill-color: blue;}
-   #p{-webkit-text-fill-color: white;}
-   #p{-webkit-text-fill-color: white;}
-   #p{text-align: center;}
-   #w{text-align: center;}
-   #w{background-color:white;}
-</STYLE>
-<body>
-         <h1 id="hedi1"> Links.website.786@gmail.com  </h1>
-    <br>
-         <h2><p id="p1"> Hello my friends how are you all my name is muhammadgohar and i am from "PAKISTAN". </p><h2>
-             <br>
-            <h3><p id="p">This website name is linkwebsite.</p></h3>
-             <br>
-            <h3><p id="p">This website provide you a different website link.</p></h3>
-             <br>
- <h1><p id="p2"> ."These are all links for you". </p></h1>
-             <br>
- <h1 id="w"> Learn & buy$ links </h1>
-             <br>
- <ul>
-    <h1><li><a id="a" href="https://www.w3schools.com/html/"><label>"w3school_html"></label></a></li></h1>
-     <br>
-    <h1><li><a id="a" href="https://play.google.com/store/games?pli=1"><label>"google_play_store"></label></a></li></h1>
-     <br>
-    <h1><li><a id="a" href="https://www.apple.com/app-store/"><label>"app_store"></label></a></li></h1>
-     <br>
-    <h1><li><a id="a" href="https://www.microsoft.com/en-ww/store/"><label>"microsoft_store"></label></a></li></h1>
- </ul>
- <h1 id="w"> games links </h1>
- <ul>
- <h1><li><a id="a" href="https://tlauncher.org/"><label>"tlauncher"></label></a></li></h1>
- <h1><li><a id="a" href="https://cloud.jiogames.com/"><label>"jio_cloud_gaming></label></a></li></h1>
-     <br>
- <h1><li><a id="a" href="https://www.crazygames.com/game/link"><label>"crazygames/label></a></li></h1>
-     <br>
- <h1><li><a id="a" href="https://www.battlegroundsmobileindia.com/"><label>"BGMI_mobile></label></a></li></h1>
-     <br>
- <h1><li><a id="a" href="https://www.epicgames.com/site/en-US/home"><label>"epicgames></label></a></li></h1>
- </ul>
- <h1 id="w"> study links </h1>
- <ul>
-    <h1><li><a id="a" href="https://studylink.com/"><label>"study"></label></a></li></h1>
-     <br>
-    <h1><li><a id="a" href="https://www.studiosity.com/blog/"><label>"studiosity></label></a></li></h1>
-     <br>
-    <h1><li><a id="a" href="https://www.studystream.live/home"><label>"studystream></a></li></h1>
-     <br>
-        <h1><li><a id="a" href="https://everydaymath.uchicago.edu/"><label>"everydaymath></a></li></h1>
-     <br>
- </ul>
-             <br>
- <h1 id="w"> shoping stores links </h1>
-             <br>
- <ul>
-    <h1><li><a id="a" href="https://www.brandsforless.com/en-ae/?msclkid=97b0dd1d90f51b9e2616b935cea6d47c"><label>"brandsforless_shopping"></label></a></li></h1>
-     <br>
-    <h1><li><a id="a" href="https://www.amazon.com/"><label>"amazon_prime_shopping></label></a></li></h1>
-     <br>
-    <h1><li><a id="a" href="https://www.luluhypermarket.com/en-ae"><label>"luluhypermarket_shopping></a></li></h1>
-     <br>
-        <h1><li><a id="a" href="https://shopping.google.com/?pli=1"><label>"shopping_google></label></a></li></h1>
-     <br>
-        <h1><li><a id="a" href="https://www.lifewire.com/shopping-sites-online-3482901"><label>"lifewire_shopping></a></li></h1>
-     <br>
-            <h1><li><a id="a" href="https://www.noon.com/uae-en/"><label>"noon_shooping></a></li></h1>
- </ul>
- </body>
-</html>
+  <title></title>
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
 
+  body {
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas {
+    border: 1px solid white;
+  }
+  </style>
+</head>
+<body>
+<canvas width="400" height="400" id="game"></canvas>
+<script>
+var canvas = document.getElementById('game');
+var context = canvas.getContext('2d');
+
+var grid = 16;
+var count = 0;
+  
+var snake = {
+  x: 160,
+  y: 160,
+  
+  // snake velocity. moves one grid length every frame in either the x or y direction
+  dx: grid,
+  dy: 0,
+  
+  // keep track of all grids the snake body occupies
+  cells: [],
+  
+  // length of the snake. grows when eating an apple
+  maxCells: 4
+};
+var apple = {
+  x: 320,
+  y: 320
+};
+
+// get random whole numbers in a specific range
+// @see https://stackoverflow.com/a/1527820/2124254
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+// game loop
+function loop() {
+  requestAnimationFrame(loop);
+
+  // slow game loop to 15 fps instead of 60 (60/15 = 4)
+  if (++count < 4) {
+    return;
+  }
+
+  count = 0;
+  context.clearRect(0,0,canvas.width,canvas.height);
+
+  // move snake by it's velocity
+  snake.x += snake.dx;
+  snake.y += snake.dy;
+
+  // wrap snake position horizontally on edge of screen
+  if (snake.x < 0) {
+    snake.x = canvas.width - grid;
+  }
+  else if (snake.x >= canvas.width) {
+    snake.x = 0;
+  }
+  
+  // wrap snake position vertically on edge of screen
+  if (snake.y < 0) {
+    snake.y = canvas.height - grid;
+  }
+  else if (snake.y >= canvas.height) {
+    snake.y = 0;
+  }
+
+  // keep track of where snake has been. front of the array is always the head
+  snake.cells.unshift({x: snake.x, y: snake.y});
+
+  // remove cells as we move away from them
+  if (snake.cells.length > snake.maxCells) {
+    snake.cells.pop();
+  }
+
+  // draw apple
+  context.fillStyle = 'red';
+  context.fillRect(apple.x, apple.y, grid-1, grid-1);
+
+  // draw snake one cell at a time
+  context.fillStyle = 'green';
+  snake.cells.forEach(function(cell, index) {
+    
+    // drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
+    context.fillRect(cell.x, cell.y, grid-1, grid-1);  
+
+    // snake ate apple
+    if (cell.x === apple.x && cell.y === apple.y) {
+      snake.maxCells++;
+
+      // canvas is 400x400 which is 25x25 grids 
+      apple.x = getRandomInt(0, 25) * grid;
+      apple.y = getRandomInt(0, 25) * grid;
+    }
+
+    // check collision with all cells after this one (modified bubble sort)
+    for (var i = index + 1; i < snake.cells.length; i++) {
+      
+      // snake occupies same space as a body part. reset game
+      if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+        snake.x = 160;
+        snake.y = 160;
+        snake.cells = [];
+        snake.maxCells = 4;
+        snake.dx = grid;
+        snake.dy = 0;
+
+        apple.x = getRandomInt(0, 25) * grid;
+        apple.y = getRandomInt(0, 25) * grid;
+      }
+    }
+  });
+}
+
+// listen to keyboard events to move the snake
+document.addEventListener('keydown', function(e) {
+  // prevent snake from backtracking on itself by checking that it's 
+  // not already moving on the same axis (pressing left while moving
+  // left won't do anything, and pressing right while moving left
+  // shouldn't let you collide with your own body)
+  
+  // left arrow key
+  if (e.which === 37 && snake.dx === 0) {
+    snake.dx = -grid;
+    snake.dy = 0;
+  }
+  // up arrow key
+  else if (e.which === 38 && snake.dy === 0) {
+    snake.dy = -grid;
+    snake.dx = 0;
+  }
+  // right arrow key
+  else if (e.which === 39 && snake.dx === 0) {
+    snake.dx = grid;
+    snake.dy = 0;
+  }
+  // down arrow key
+  else if (e.which === 40 && snake.dy === 0) {
+    snake.dy = grid;
+    snake.dx = 0;
+  }
+});
+
+// start the game
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
